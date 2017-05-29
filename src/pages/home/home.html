@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Samaya Kurippu</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item-group>
+      <ion-item>
+        <ion-label>Today</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY"
+                      pickerFormat="DD MMM YYYY"
+                      [(ngModel)]="arrivalDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Arrival</ion-label>
+        <ion-datetime displayFormat="h:mm A"
+                      pickerFormat="h mm A"
+                      [(ngModel)]="arrivalTime"
+                      (ionChange)="onArrivalTimeChange()"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Current Time</ion-label>
+        <ion-datetime displayFormat="h:mm A"
+                      pickerFormat="h mm A"
+                      [(ngModel)]="currentTime"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Leave By</ion-label>
+        <ion-icon name='color-wand'
+                  item-start></ion-icon>
+        <ion-datetime displayFormat="h:mm A"
+                      pickerFormat="h mm A"
+                      [ngModel]="leaveTime"></ion-datetime>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item>
+        <ion-label>Logged Time</ion-label>
+        <ion-datetime displayFormat="h:mm"
+                      pickerFormat="h mm"
+                      [(ngModel)]="loggedTime"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="name"></ion-input>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <button ion-button
+              full
+              icon-left
+              (click)="getCurrentTaskTime()">
+        <ion-icon name="clock"></ion-icon> Calculate Current Task Time </button>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
