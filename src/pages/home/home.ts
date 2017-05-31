@@ -12,6 +12,7 @@ export class HomePage {
   leaveTime: String = "";
   loggedTime: String = "0:00";
   currentTime: String = this.getTimeInString(new Date());
+  taskTime: String = "";
 
   constructor(
     public navCtrl: NavController
@@ -41,20 +42,16 @@ export class HomePage {
   }
 
   getCurrentTaskTime() {
+    // task-time = current-time - (arrival-time + logged-time) + 10 mins documentation time
     let loggedTime = this.getArrivalDate();
     this.loggedTime = this.loggedTime || "0:00";
     let time = this.loggedTime.split(":");
-    loggedTime.setHours(parseInt(time[0]));
-    loggedTime.setMinutes(parseInt(time[1]));
+    loggedTime.setHours(parseInt(time[0]) + loggedTime.getHours());
+    loggedTime.setMinutes(parseInt(time[1]) + loggedTime.getMinutes());
+
     let currentTime = this.getCurrentTime();
-
-    console.log('> total logged time', loggedTime);
-    console.log('> currrent time', currentTime);
-
-    let differnce = (loggedTime - currentTime)
-
-
-
+    let differnce = (+(currentTime) - +(loggedTime))
+    this.taskTime = this.convertSecondsToHourMinFormat(differnce);
   }
 
   getCurrentTime() {
@@ -86,6 +83,10 @@ export class HomePage {
     var s = value + "";
     while (s.length < 2) s = "0" + s;
     return s;
+  }
+
+  convertSecondsToHourMinFormat(milliseconds) {
+    return new Date(milliseconds).toISOString().substr(11, 8);
   }
 
 }

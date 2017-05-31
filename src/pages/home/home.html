@@ -41,11 +41,20 @@
                       pickerFormat="h mm"
                       [(ngModel)]="loggedTime"></ion-datetime>
       </ion-item>
-      <ion-item>
-        <ion-label fixed>Name</ion-label>
-        <ion-input type="text"
-                   [(ngModel)]="name"></ion-input>
-      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-card text-center>
+        <ion-card-header> Task Time</ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-datetime text-center
+                          class="timer"
+                          displayFormat="h:mm"
+                          pickerFormat="h mm"
+                          [(ngModel)]="taskTime"></ion-datetime>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
     </ion-item-group>
     <ion-item-group>
       <button ion-button
