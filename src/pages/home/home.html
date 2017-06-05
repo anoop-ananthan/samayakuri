@@ -1,67 +1,62 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>Samaya Kurippu</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
     <ion-item-group>
+      <ion-item-divider color="royal">Arrival </ion-item-divider>
       <ion-item>
-        <ion-label>Today</ion-label>
-        <ion-datetime displayFormat="DD MMM YYYY"
+        <ion-label>Date</ion-label>
+        <ion-datetime text-center
+                      displayFormat="DD MMM YYYY"
                       pickerFormat="DD MMM YYYY"
-                      [(ngModel)]="arrivalDate"></ion-datetime>
+                      [(ngModel)]="kuri.arrivalDate"
+                      (ionChange)="onArrivalDateChange()"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>Arrival</ion-label>
-        <ion-datetime displayFormat="h:mm A"
+        <ion-label>Time</ion-label>
+        <ion-datetime text-center
+                      displayFormat="h:mm A"
                       pickerFormat="h mm A"
-                      [(ngModel)]="arrivalTime"
+                      [(ngModel)]="kuri.arrivalTime"
                       (ionChange)="onArrivalTimeChange()"></ion-datetime>
       </ion-item>
-      <ion-item>
-        <ion-label>Current Time</ion-label>
-        <ion-datetime displayFormat="h:mm A"
-                      pickerFormat="h mm A"
-                      [(ngModel)]="currentTime"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>Leave By</ion-label>
-        <ion-icon name='color-wand'
-                  item-start></ion-icon>
-        <ion-datetime displayFormat="h:mm A"
-                      pickerFormat="h mm A"
-                      [ngModel]="leaveTime"></ion-datetime>
-      </ion-item>
     </ion-item-group>
     <ion-item-group>
+      <ion-item-divider color="royal">Task </ion-item-divider>
       <ion-item>
         <ion-label>Logged Time</ion-label>
-        <ion-datetime displayFormat="h:mm"
+        <ion-datetime text-center
+                      displayFormat="h:mm"
                       pickerFormat="h mm"
-                      [(ngModel)]="loggedTime"></ion-datetime>
+                      [(ngModel)]="kuri.loggedTime"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Current Task Time</ion-label>
+        <ion-label text-right>{{kuri.taskTime }}</ion-label>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
-      <ion-card text-center>
-        <ion-card-header> Task Time</ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            <ion-datetime text-center
-                          class="timer"
-                          displayFormat="h:mm"
-                          pickerFormat="h mm"
-                          [(ngModel)]="taskTime"></ion-datetime>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-    </ion-item-group>
-    <ion-item-group>
-      <button ion-button
-              full
-              icon-left
-              (click)="getCurrentTaskTime()">
-        <ion-icon name="clock"></ion-icon> Calculate Current Task Time </button>
+      <ion-item-divider color="royal"> Departure </ion-item-divider>
+      <ion-item>
+        <ion-label>Time</ion-label>
+        <ion-label text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
+      </ion-item>
     </ion-item-group>
   </ion-list>
+  <ion-item-group>
+    <button ion-button
+            round
+            full
+            item-right
+            (click)="onCalculateCurrentTaskTimeClicked()">
+      <ion-icon name="clock"></ion-icon>Calculate Task Time </button>
+    <button ion-button
+            full
+            color="danger"
+            round
+            (click)="onResetKuriClicked()">Reset</button>
+  </ion-item-group>
 </ion-content>
