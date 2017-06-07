@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import moment from "moment";
 
 import { Kuri } from "../../shared/model/kuri";
-import { Samayam } from "../../shared/service/samayam";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  reminderColor: string = "danger";
+
   constructor(
     public navCtrl: NavController,
     public kuri: Kuri,
-    public samayam: Samayam,
-    private msgbox: AlertController
+    private msgbox: AlertController,
+    private localNotifications: LocalNotifications
   ) { }
 
   ngOnInit() {
@@ -40,7 +43,13 @@ export class HomePage {
 
   onCalculateCurrentTaskTimeClicked() {
     this.calculateCurrentTaskTime();
-    this.updateLoggedTimeConfirm();
+    this.confirmAddLoggedTimeAndCurrentTime();
+  }
+
+  onAlarmClicked() {
+    this.reminderColor = (this.reminderColor == "success") ? "danger" : "success";
+    if (this.reminderColor == "success")
+      this.setReminder();
   }
 
   getSavedKuriOrNew(): Kuri {
@@ -53,10 +62,9 @@ export class HomePage {
 
   newKuri(): Kuri {
     let kuri = new Kuri();
-    let date = new Date();
-    kuri.arrivalDate = this.samayam.convertToDateString(date);
-    kuri.arrivalTime = this.samayam.convertToTimeString(date);
-    kuri.currentTime = this.samayam.convertToTimeString(date);
+    kuri.arrivalDate = moment().format("YYYY-MM-DD");
+    kuri.arrivalTime = moment().format("HH:mm");
+    kuri.currentTime = moment().format("HH:mm");
     kuri.leaveTime = null;
     kuri.loggedTime = "";
     kuri.taskTime = "";
@@ -67,45 +75,33 @@ export class HomePage {
     localStorage.setItem("kuri", JSON.stringify(this.kuri));
   }
 
-  getArrivalDate() {
-    let today = new Date(this.kuri.arrivalDate);
-    let time = this.kuri.arrivalTime.split(":");
-    today.setHours(parseInt(time[0]));
-    today.setMinutes(parseInt(time[1]));
-    return today;
+  getArrivalDateAndTime() {
+    let today = moment(`${this.kuri.arrivalDate} ${this.kuri.arrivalTime}`);
+    return new Date(today.format());
   }
 
   getLeaveTime() {
-    let today = this.getArrivalDate();
-    today.setHours(today.getHours() + 8);
-    today.setMinutes(today.getMinutes() + 15);
-    console.log('> leave date', today);
-    return today;
+    let arrival = moment(this.getArrivalDateAndTime());
+    let departure = arrival.add({ h: 8, m: 15 });
+    return new Date(departure.format());
   }
-
 
   calculateCurrentTaskTime() {
-    // task-time = current-time - (arrival-time + logged-time) + 10 mins documentation time
-    let loggedTime = this.getArrivalDate();
-    let currentTime = new Date();
-
-    this.kuri.loggedTime = this.kuri.loggedTime || "0:00";
-    let time = this.kuri.loggedTime.split(":");
-    loggedTime.setHours(parseInt(time[0]) + loggedTime.getHours());
-    loggedTime.setMinutes(parseInt(time[1]) + loggedTime.getMinutes());
-
-    let differnce = (+(currentTime) - +(loggedTime))
-    this.kuri.taskTime = this.samayam.convertSecondsToHourMinFormat(differnce);
+    let nowInMilliseconds = moment(new Date().getTime());
+    let arrivalTime = moment.duration(this.kuri.arrivalTime);
+    let loggedTime = moment.duration(this.kuri.loggedTime);
+    let currentTaskTime = nowInMilliseconds.subtract(arrivalTime).subtract(loggedTime).add(moment.duration({ m: 5 }));
+    this.kuri.taskTime = currentTaskTime.format("H:mm");
   }
 
-  updateLoggedTimeConfirm() {
+  confirmAddLoggedTimeAndCurrentTime() {
     let confirm = this.msgbox.create({
       title: "Update logged time",
-      subTitle: `Are you sure to add <b>${this.kuri.taskTime}</b> to logged time?`,
+      subTitle: `You have <b>${this.kuri.taskTime}</b> in current task. Do you want to add that to logged time?`,
       buttons: [
-        { text: 'Nope', handler: () => { console.log('> mia!'); } },
+        { text: 'No', handler: () => { console.log('> mia!'); } },
         {
-          text: 'Yep', handler: () => {
+          text: 'Yes', handler: () => {
             this.updateLoggedTime();
           }
         }
@@ -115,8 +111,23 @@ export class HomePage {
   }
 
   updateLoggedTime() {
-
+    let currentTaskTime = moment.duration(this.kuri.taskTime);
+    let loggedTime = moment.duration(this.kuri.loggedTime);
+    let totalLoggedTime = currentTaskTime.add(loggedTime);
+    this.kuri.loggedTime = moment.utc(totalLoggedTime.asMilliseconds()).format("HH:mm");
+    this.kuri.taskTime = null;
   }
 
-
+  setReminder() {
+    let alarmTime = new Date(moment().add({ s: 10 }).format());
+    console.log('> now:', new Date());
+    console.log('> alarm time', alarmTime);
+    this.localNotifications.schedule({
+      id: 1,
+      at: alarmTime,
+      text: 'Single ILocalNotification',
+      sound: 'file://sound.mp3',
+      data: { secret: "Anoop" }
+    });
+  }
 }

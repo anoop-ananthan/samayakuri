@@ -40,23 +40,27 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="royal"> Departure </ion-item-divider>
+      <!-- Leave time -->
       <ion-item>
+        <ion-icon item-start
+                  name="md-alarm"
+                  [color]="reminderColor"
+                  (click)="onAlarmClicked()"></ion-icon>
         <ion-label>Time</ion-label>
-        <ion-label text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
+        <ion-label item-end
+                   text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
       </ion-item>
     </ion-item-group>
   </ion-list>
-  <ion-item-group>
+  <ion-item-group text-center>
     <button ion-button
-            round
-            full
-            item-right
+            outline
             (click)="onCalculateCurrentTaskTimeClicked()">
-      <ion-icon name="clock"></ion-icon>Calculate Task Time </button>
+      <ion-icon name="clock"></ion-icon> Calculate Task Time </button>
     <button ion-button
-            full
-            color="danger"
-            round
-            (click)="onResetKuriClicked()">Reset</button>
+            outline
+            color="success"
+            (click)="onResetKuriClicked()">
+      <ion-icon name="happy"></ion-icon> Start a new day! </button>
   </ion-item-group>
 </ion-content>

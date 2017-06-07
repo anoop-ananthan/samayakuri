@@ -38,6 +38,4 @@ export class Samayam {
     date.setMinutes(date.getMinutes() + mins);
     return date;
   }
-
-
 }

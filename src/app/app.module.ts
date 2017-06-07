@@ -1,6 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { FileChooser } from '@ionic-native/file-chooser';
+
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -40,6 +43,8 @@ import { Kuri } from "../shared/model/kuri";
     SplashScreen,
     Samayam,
     Kuri,
+    LocalNotifications,
+    FileChooser,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
