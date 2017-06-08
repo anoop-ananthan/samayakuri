@@ -6,6 +6,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import moment from "moment";
 
 import { Kuri } from "../../shared/model/kuri";
+import { SettingsService } from "../../shared/service/settings.service";
 
 @Component({
   selector: 'page-home',
@@ -19,7 +20,8 @@ export class HomePage {
     public navCtrl: NavController,
     public kuri: Kuri,
     private msgbox: AlertController,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private settings: SettingsService
   ) { }
 
   ngOnInit() {
@@ -126,11 +128,12 @@ export class HomePage {
     let alarmTime = new Date(moment().add({ s: 10 }).format());
     console.log('> now:', new Date());
     console.log('> alarm time', alarmTime);
+    console.log('> alarm sound file path', this.settings.alarmSoundFileName);
     this.localNotifications.schedule({
       id: 1,
       at: alarmTime,
       text: "Anoop's swantham reminder",
-      sound: "file:///storage/emulated/0/sound.mp3",
+      sound: this.settings.alarmSoundFileName,
       data: { secret: "Anoop" }
     });
   }

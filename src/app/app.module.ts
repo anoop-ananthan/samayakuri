@@ -16,6 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Samayam } from "../shared/service/samayam";
+import { SettingsService } from "../shared/service/settings.service";
 
 import { Kuri } from "../shared/model/kuri";
 
@@ -43,6 +44,7 @@ import { Kuri } from "../shared/model/kuri";
     StatusBar,
     SplashScreen,
     Samayam,
+    SettingsService,
     Kuri,
     LocalNotifications,
     FilePath,

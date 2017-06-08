@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { SettingsService } from "../../shared/service/settings.service";
 
 @Component({
   selector: 'page-about',
@@ -13,7 +14,8 @@ export class AboutPage {
   constructor(
     public navCtrl: NavController,
     private filePath: FilePath,
-    private fileChooser: FileChooser
+    private fileChooser: FileChooser,
+    private settings: SettingsService
   ) { }
 
   onSoundClicked() {
@@ -33,7 +35,7 @@ export class AboutPage {
     this.filePath.resolveNativePath(url)
       .catch()
       .then((resolvedPath) => {
-        this.fileName = resolvedPath;
+        this.settings.alarmSoundFileName = resolvedPath;
         console.log(`> resolved path is ${resolvedPath}`);
       })
   }
