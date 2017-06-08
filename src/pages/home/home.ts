@@ -51,6 +51,8 @@ export class HomePage {
     this.reminderColor = (this.reminderColor == "success") ? "danger" : "success";
     if (this.reminderColor == "success")
       this.setReminder();
+    else
+      this.resetAlarm();
   }
 
   getSavedKuriOrNew(): Kuri {
@@ -128,7 +130,7 @@ export class HomePage {
       id: 1,
       at: alarmTime,
       text: "Anoop's swantham reminder",
-      sound: 'file://sound.mp3',
+      sound: "file:///storage/emulated/0/sound.mp3",
       data: { secret: "Anoop" }
     });
   }

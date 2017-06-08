@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
 
 import { MyApp } from './app.component';
@@ -44,6 +45,7 @@ import { Kuri } from "../shared/model/kuri";
     Samayam,
     Kuri,
     LocalNotifications,
+    FilePath,
     FileChooser,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
