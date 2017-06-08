@@ -38,7 +38,6 @@ export class SettingsPage implements OnInit {
       .catch()
       .then((resolvedPath) => {
         this.settings.alarmSoundFileName = resolvedPath;
-        console.log(`> resolved path is ${resolvedPath}`);
       })
   }
 

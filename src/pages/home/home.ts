@@ -128,8 +128,8 @@ export class HomePage {
     let alarmTime = new Date(moment().add({ s: 10 }).format());
     this.localNotifications.schedule({
       id: 1,
-      at: alarmTime,
-      text: "Anoop's swantham reminder",
+      at: this.kuri.leaveTime,
+      text: "Time's up! Go home buddy...",
       sound: this.settings.alarmSoundFileName,
       data: { secret: "Anoop" }
     });
