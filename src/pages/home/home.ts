@@ -126,9 +126,6 @@ export class HomePage {
   setReminder() {
     this.localNotifications.clearAll();
     let alarmTime = new Date(moment().add({ s: 10 }).format());
-    console.log('> now:', new Date());
-    console.log('> alarm time', alarmTime);
-    console.log('> alarm sound file path', this.settings.alarmSoundFileName);
     this.localNotifications.schedule({
       id: 1,
       at: alarmTime,
