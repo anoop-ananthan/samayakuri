@@ -36,6 +36,7 @@ export class HomePage {
   }
 
   onResetKuriClicked() {
+    this.resetAlarm();
     localStorage.clear();
     this.kuri = this.newKuri();
     this.saveKuriToLocalStorage();
@@ -119,15 +120,21 @@ export class HomePage {
   }
 
   setReminder() {
+    this.localNotifications.clearAll();
     let alarmTime = new Date(moment().add({ s: 10 }).format());
     console.log('> now:', new Date());
     console.log('> alarm time', alarmTime);
     this.localNotifications.schedule({
       id: 1,
       at: alarmTime,
-      text: 'Single ILocalNotification',
+      text: "Anoop's swantham reminder",
       sound: 'file://sound.mp3',
       data: { secret: "Anoop" }
     });
+  }
+
+  resetAlarm() {
+    this.localNotifications.clearAll();
+    this.reminderColor = "danger";
   }
 }
