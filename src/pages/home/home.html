@@ -5,62 +5,60 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item-group>
-      <ion-item-divider color="royal">Arrival </ion-item-divider>
-      <ion-item>
-        <ion-label>Date</ion-label>
-        <ion-datetime text-center
-                      displayFormat="DD MMM YYYY"
-                      pickerFormat="DD MMM YYYY"
-                      [(ngModel)]="kuri.arrivalDate"
-                      (ionChange)="onArrivalDateChange()"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>Time</ion-label>
-        <ion-datetime text-center
-                      displayFormat="h:mm A"
-                      pickerFormat="h mm A"
-                      [(ngModel)]="kuri.arrivalTime"
-                      (ionChange)="onArrivalTimeChange()"></ion-datetime>
-      </ion-item>
-    </ion-item-group>
-    <ion-item-group>
-      <ion-item-divider color="royal">Task </ion-item-divider>
-      <ion-item>
-        <ion-label>Logged Time</ion-label>
-        <ion-datetime text-center
-                      displayFormat="h:mm"
-                      pickerFormat="h mm"
-                      [(ngModel)]="kuri.loggedTime"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>Current Task Time</ion-label>
-        <ion-label text-right>{{kuri.taskTime }}</ion-label>
-      </ion-item>
-    </ion-item-group>
-    <ion-item-group>
-      <ion-item-divider color="royal"> Departure </ion-item-divider>
-      <!-- Leave time -->
-      <ion-item>
-        <ion-icon item-start
-                  name="md-alarm"
-                  [color]="reminderColor"
-                  (click)="onAlarmClicked()"></ion-icon>
-        <ion-label>Time</ion-label>
-        <ion-label item-end
-                   text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
-      </ion-item>
-    </ion-item-group>
+    <ion-item-divider color="light"> Arrival </ion-item-divider>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime text-center
+                    displayFormat="DD MMM YYYY"
+                    pickerFormat="DD MMM YYYY"
+                    [(ngModel)]="kuri.arrivalDate"
+                    (ionChange)="onArrivalDateChange()"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime text-center
+                    displayFormat="h:mm A"
+                    pickerFormat="h mm A"
+                    [(ngModel)]="kuri.arrivalTime"
+                    (ionChange)="onArrivalTimeChange()"></ion-datetime>
+    </ion-item>
+    <ion-item-divider color="light"> Task </ion-item-divider>
+    <ion-item>
+      <ion-label>Logged Time</ion-label>
+      <ion-datetime text-center
+                    displayFormat="h:mm"
+                    pickerFormat="h mm"
+                    [(ngModel)]="kuri.loggedTime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Current Task Time</ion-label>
+      <ion-input text-right
+                 readonly="true"
+                 [ngModel]="kuri.taskTime"></ion-input>
+    </ion-item>
+    <ion-item-divider color="light"> Departure </ion-item-divider>
+    <!-- Leave time -->
+    <ion-item>
+      <ion-icon item-end
+                name="md-alarm"
+                [color]="reminderColor"
+                (click)="onAlarmClicked()"></ion-icon>
+      <ion-label>Time</ion-label>
+      <ion-label item-end
+                 text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
+    </ion-item>
   </ion-list>
-  <button ion-button
-          icon-left
-          outline
-          (click)="onCalculateCurrentTaskTimeClicked()">
-    <ion-icon name="clock"></ion-icon> Calculate Task Time </button>
-  <button ion-button
-          outline
-          icon-left
-          color="success"
-          (click)="onResetKuriClicked()">
-    <ion-icon name="happy"></ion-icon> New day! </button>
+  <p text-center>
+    <button ion-button
+            icon-left
+            outline
+            (click)="onCalculateCurrentTaskTimeClicked()">
+      <ion-icon name="clock"></ion-icon>Calculate Task Time</button>
+    <button ion-button
+            icon-left
+            outline
+            color="success"
+            (click)="onResetKuriClicked()">
+      <ion-icon name="happy"></ion-icon>New day!</button>
+  </p>
 </ion-content>
