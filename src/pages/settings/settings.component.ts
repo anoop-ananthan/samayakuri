@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { SettingsService } from "../../shared/service/settings.service";
@@ -13,6 +13,7 @@ export class SettingsPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
+    private toastCtrl: ToastController,
     private filePath: FilePath,
     private fileChooser: FileChooser,
     private settingsService: SettingsService,
@@ -29,6 +30,7 @@ export class SettingsPage implements OnInit {
 
   onSettingsSaveClicked() {
     this.settingsService.saveSettings(this.settings);
+    this.showSaveSuccessToast();
   }
 
   getSoundFilePath() {
@@ -45,5 +47,13 @@ export class SettingsPage implements OnInit {
       .then((resolvedPath) => {
         this.settings.notificationSoundFileName = resolvedPath;
       })
+  }
+
+  showSaveSuccessToast() {
+    let toast = this.toastCtrl.create({
+      message: "Successfully saved the settings!",
+      duration: 2500
+    });
+    toast.present();
   }
 }
