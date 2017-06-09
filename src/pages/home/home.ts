@@ -21,7 +21,7 @@ export class HomePage {
     public kuri: Kuri,
     private msgbox: AlertController,
     private localNotifications: LocalNotifications,
-    private settings: SettingsService
+    private settingsService: SettingsService
   ) { }
 
   ngOnInit() {
@@ -124,16 +124,13 @@ export class HomePage {
   }
 
   setReminder() {
+    let settings = this.settingsService.getSettings();
     this.localNotifications.clearAll();
-    let alarmTime = new Date(moment().add({ s: 10 }).format());
-    console.log('> now:', new Date());
-    console.log('> alarm time', alarmTime);
-    console.log('> alarm sound file path', this.settings.alarmSoundFileName);
     this.localNotifications.schedule({
       id: 1,
-      at: alarmTime,
-      text: "Anoop's swantham reminder",
-      sound: this.settings.alarmSoundFileName,
+      at: this.kuri.leaveTime,
+      text: settings.notificationText,
+      sound: settings.notificationSoundFileName,
       data: { secret: "Anoop" }
     });
   }
