@@ -19,7 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Samayam } from "../shared/service/samayam";
 import { SettingsService } from "../shared/service/settings.service";
 
-import { Kuri } from "../shared/model/kuri";
+import { Kuri, Settings } from "../shared/model/index";
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { Kuri } from "../shared/model/kuri";
     Samayam,
     SettingsService,
     Kuri,
+    Settings,
     LocalNotifications,
     FilePath,
     FileChooser,

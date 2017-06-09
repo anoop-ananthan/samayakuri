@@ -16,6 +16,5 @@ export class TabsPage {
   settingsTab = SettingsPage;
 
   constructor() {
-    console.log('> settingsTab', this.settingsTab);
   }
 }

@@ -21,7 +21,7 @@ export class HomePage {
     public kuri: Kuri,
     private msgbox: AlertController,
     private localNotifications: LocalNotifications,
-    private settings: SettingsService
+    private settingsService: SettingsService
   ) { }
 
   ngOnInit() {
@@ -124,13 +124,13 @@ export class HomePage {
   }
 
   setReminder() {
+    let settings = this.settingsService.getSettings();
     this.localNotifications.clearAll();
-    let alarmTime = new Date(moment().add({ s: 10 }).format());
     this.localNotifications.schedule({
       id: 1,
       at: this.kuri.leaveTime,
-      text: "Time's up! Go home buddy...",
-      sound: this.settings.alarmSoundFileName,
+      text: settings.notificationText,
+      sound: settings.notificationSoundFileName,
       data: { secret: "Anoop" }
     });
   }

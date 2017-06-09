@@ -11,7 +11,30 @@
               detail-none
               (click)="onSoundClicked()">
         <ion-icon name="md-musical-note"></ion-icon> Sound </button>
+      <ion-item text-wrap> {{settings.notificationSoundFileName}} </ion-item>
+      <ion-item>
+        <ion-icon item-left
+                  name="bookmark"></ion-icon>
+        <ion-label floating>Notification text</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="settings.notificationText"></ion-input>
+        <ion-icon item-right
+                  name="star"
+                  (click)="onSettingsSaveClicked()"></ion-icon>
+      </ion-item>
     </ion-item-group>
-    <ion-item> {{settings.alarmSoundFileName}} </ion-item>
+    <ion-item-group>
+      <button ion-button
+              full
+              icon-right
+              color="secondary"
+              (click)="onSettingsSaveClicked()"> Save Settings
+        <ion-icon name="game-controller-b"></ion-icon>
+      </button>
+    </ion-item-group>
   </ion-list>
 </ion-content>
+<ion-item>
+  <ion-label floating></ion-label>
+  <ion-input type=""></ion-input>
+</ion-item>

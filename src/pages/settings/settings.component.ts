@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { SettingsService } from "../../shared/service/settings.service";
+import { Settings } from "../../shared/model/index";
 
 @Component({
   selector: 'app-settings',
@@ -14,21 +15,26 @@ export class SettingsPage implements OnInit {
     public navCtrl: NavController,
     private filePath: FilePath,
     private fileChooser: FileChooser,
-    private settings: SettingsService
+    private settingsService: SettingsService,
+    private settings: Settings
   ) { }
 
   ngOnInit() {
+    this.settings = this.settingsService.getSettings();
   }
 
   onSoundClicked() {
     this.getSoundFilePath();
   }
 
+  onSettingsSaveClicked() {
+    this.settingsService.saveSettings(this.settings);
+  }
+
   getSoundFilePath() {
     this.fileChooser.open()
       .catch()
       .then((url) => {
-        console.log(`> you selected ${url}`);
         this.resolveFilePath(url);
       })
   }
@@ -37,8 +43,7 @@ export class SettingsPage implements OnInit {
     this.filePath.resolveNativePath(url)
       .catch()
       .then((resolvedPath) => {
-        this.settings.alarmSoundFileName = resolvedPath;
+        this.settings.notificationSoundFileName = resolvedPath;
       })
   }
-
 }
