@@ -20,6 +20,7 @@
     "@angular/http": "4.1.2",
     "@angular/platform-browser": "4.1.2",
     "@angular/platform-browser-dynamic": "4.1.2",
+    "@ionic-native/app-version": "^3.12.1",
     "@ionic-native/core": "^3.10.2",
     "@ionic-native/file-chooser": "^3.12.1",
     "@ionic-native/file-path": "^3.12.1",

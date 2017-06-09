@@ -52,15 +52,15 @@
       </ion-item>
     </ion-item-group>
   </ion-list>
-  <ion-item-group text-center>
-    <button ion-button
-            outline
-            (click)="onCalculateCurrentTaskTimeClicked()">
-      <ion-icon name="clock"></ion-icon> Calculate Task Time </button>
-    <button ion-button
-            outline
-            color="success"
-            (click)="onResetKuriClicked()">
-      <ion-icon name="happy"></ion-icon> Start a new day! </button>
-  </ion-item-group>
+  <button ion-button
+          icon-left
+          outline
+          (click)="onCalculateCurrentTaskTimeClicked()">
+    <ion-icon name="clock"></ion-icon> Calculate Task Time </button>
+  <button ion-button
+          outline
+          icon-left
+          color="success"
+          (click)="onResetKuriClicked()">
+    <ion-icon name="happy"></ion-icon> New day! </button>
 </ion-content>

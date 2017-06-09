@@ -3,6 +3,61 @@
     <ion-title> About </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-list> </ion-list>
+<ion-content>
+  <ion-list>
+    <ion-list-header>Application</ion-list-header>
+    <ion-item text-wrap>
+      <h3>App Name </h3>
+      <p> {{appName}}
+        <small text-right>{{packageName}}</small>
+      </p>
+    </ion-item>
+    <ion-item text-wrap>
+      <h3>Version Number</h3>
+      <p> {{versionNumber}} </p>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Author</ion-list-header>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/image/anoop.jpg"> </ion-avatar>
+      <h2>Anoop P A </h2>
+      <p>I like to hear about your projects!</p>
+    </ion-item>
+  </ion-list>
+  <!-- Fab list -->
+  <ion-fab right
+           bottom>
+    <a ion-fab
+       color="light">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </a>
+    <ion-fab-list side="left">
+      <a ion-fab>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </a>
+      <button ion-fab>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="logo-googleplus"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
+<!-- Don't remove -->
+<!-- Good sample showing multiple controls -->
+<!--<ion-item>
+  <ion-icon item-left
+            name="phone-portrait"></ion-icon>
+  <ion-label floating>Notification text</ion-label>
+  <ion-input type="text"
+             placeholder="Mobile no"></ion-input>
+  <ion-icon item-right
+            name="contacts"
+            (click)="pickContactNo()"></ion-icon>
+</ion-item>-->
