@@ -35,6 +35,8 @@ export class HomePage {
   onArrivalTimeChange() {
     this.kuri.leaveTime = this.getLeaveTime();
     this.saveKuriToLocalStorage();
+    this.reminderColor = "success";
+    this.setReminder();
   }
 
   onResetKuriClicked() {
@@ -138,5 +140,9 @@ export class HomePage {
   resetAlarm() {
     this.localNotifications.clearAll();
     this.reminderColor = "danger";
+  }
+
+  reminderNotSet(): boolean {
+    return this.reminderColor == "danger";
   }
 }
