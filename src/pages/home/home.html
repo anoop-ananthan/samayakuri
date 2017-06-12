@@ -3,8 +3,9 @@
     <ion-title>Samaya Kurippu</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-list>
+<ion-content>
+  <!-- Arrival group -->
+  <ion-item-group>
     <ion-item-divider color="light"> Arrival </ion-item-divider>
     <ion-item>
       <ion-label>Date</ion-label>
@@ -22,6 +23,9 @@
                     [(ngModel)]="kuri.arrivalTime"
                     (ionChange)="onArrivalTimeChange()"></ion-datetime>
     </ion-item>
+  </ion-item-group>
+  <!-- Task group -->
+  <ion-item-group>
     <ion-item-divider color="light"> Task </ion-item-divider>
     <ion-item>
       <ion-label>Logged Time</ion-label>
@@ -36,6 +40,9 @@
                  readonly="true"
                  [ngModel]="kuri.taskTime"></ion-input>
     </ion-item>
+  </ion-item-group>
+  <!--Departure group -->
+  <ion-item-group>
     <ion-item-divider color="light"> Departure </ion-item-divider>
     <!-- Leave time -->
     <ion-item>
@@ -47,7 +54,7 @@
       <ion-label item-end
                  text-right>{{kuri.leaveTime | date: 'h:mm a'}}</ion-label>
     </ion-item>
-  </ion-list>
+  </ion-item-group>
   <p text-center>
     <button ion-button
             icon-left
