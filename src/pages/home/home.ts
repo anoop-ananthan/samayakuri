@@ -128,6 +128,7 @@ export class HomePage {
   setReminder() {
     let settings = this.settingsService.getSettings();
     this.localNotifications.clearAll();
+    this.localNotifications.cancelAll()
     this.localNotifications.schedule({
       id: 1,
       at: this.kuri.leaveTime,
@@ -138,6 +139,8 @@ export class HomePage {
   }
 
   resetAlarm() {
+    this.localNotifications.cancel(1)
+    this.localNotifications.cancelAll().catch(e => console.log(e));
     this.localNotifications.clearAll();
     this.reminderColor = "danger";
   }

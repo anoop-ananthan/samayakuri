@@ -10,6 +10,7 @@ import { Settings } from "../../shared/model/index";
   templateUrl: './settings.component.html'
 })
 export class SettingsPage implements OnInit {
+  private shortSoundFileName: string;
 
   constructor(
     public navCtrl: NavController,
@@ -46,13 +47,20 @@ export class SettingsPage implements OnInit {
       .catch()
       .then((resolvedPath) => {
         this.settings.notificationSoundFileName = resolvedPath;
+        this.getReadableFileName(resolvedPath);
       })
+  }
+
+  getReadableFileName(fullFileName: string) {
+    let text = fullFileName.split("/");
+    this.shortSoundFileName = text[text.length - 1];
   }
 
   showSaveSuccessToast() {
     let toast = this.toastCtrl.create({
       message: "Successfully saved the settings!",
-      duration: 2500
+      duration: 2500,
+      closeButtonText: "OK"
     });
     toast.present();
   }
