@@ -110,6 +110,7 @@ export class HomePage {
         {
           text: 'Yes', handler: () => {
             this.updateLoggedTime();
+            this.saveKuriToLocalStorage();
           }
         }
       ]
