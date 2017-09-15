@@ -59,6 +59,10 @@ export class HomePage {
       this.resetAlarm();
   }
 
+  onClearCurrentTaskTimeClicked(){
+    this.kuri.taskTime = null;
+  }
+
   getSavedKuriOrNew(): Kuri {
     let kuri = JSON.parse(localStorage.getItem("kuri"));
     if (kuri == null) {

@@ -28,6 +28,10 @@
   <ion-item-group>
     <ion-item-divider color="light"> Task </ion-item-divider>
     <ion-item>
+        <ion-icon item-end
+        name="md-close-circle"
+        [color]="danger"
+        (click)="kuri.loggedTime=null"></ion-icon>
       <ion-label>Logged Time</ion-label>
       <ion-datetime text-center
                     displayFormat="h:mm"
@@ -35,6 +39,10 @@
                     [(ngModel)]="kuri.loggedTime"></ion-datetime>
     </ion-item>
     <ion-item>
+      <ion-icon item-end
+                name="md-close-circle"
+                [color]="danger"
+                (click)="onClearCurrentTaskTimeClicked()"></ion-icon>
       <ion-label>Current Task Time</ion-label>
       <ion-input text-right
                  readonly="true"
